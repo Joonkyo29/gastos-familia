@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { Trash2, Plus } from 'lucide-react';
 import { database } from './firebase';
-import { ref, set, onValue, remove, update } from 'firebase/database';
+import { ref, set, onValue, remove } from 'firebase/database';
 
 const GastosFamilia = () => {
   const [transacciones, setTransacciones] = useState([]);
@@ -90,12 +90,14 @@ const GastosFamilia = () => {
   }, []);
 
   // Asegurar que la categoría seleccionada exista
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!categorias.includes(form.categoria)) {
       setForm({ ...form, categoria: categorias[0] || 'Otros' });
     }
   }, [categorias]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!categorias.includes(formRecurrente.categoria)) {
       setFormRecurrente({ ...formRecurrente, categoria: categorias[0] || 'Otros' });
@@ -140,6 +142,7 @@ const GastosFamilia = () => {
   };
 
   // Procesar gastos/ingresos recurrentes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
